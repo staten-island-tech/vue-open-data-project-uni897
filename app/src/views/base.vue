@@ -1,7 +1,9 @@
 <template>
     <div class="m-5">      
       <h1 v-if="!checkSelect">Please select a restuarant</h1>
-      <select @change="getCritical" v-if="loaded" v-model="selected" class="bg-teal-300 border-3 border-teal-500">
+      <input v-model="searched" placeholder="Please type a name"></input>
+      <br/>
+      <select v-if="loaded" v-model="selected" class="bg-teal-300 border-3 border-teal-500">
         <option>--Select--</option>
         <option v-for="rest in rests" :key="rest.dba" :value="rest">{{ rest.dba }}</option>
       </select>
@@ -15,12 +17,10 @@ import RestuarantCard from '@/components/RestuarantCard.vue'
 const rests = ref()
 const loaded = ref(false)
 const selected = ref("--Select--")
+const searched = ref("")
 
 const checkSelect = computed(() => selected.value !== "--Select--")
 
-function getCritical(){
-  console.log(selected.value.critical_flag)
-}
 async function getData() {
   try {
     const response = await fetch('https://data.cityofnewyork.us/resource/43nn-pn8j.json')
