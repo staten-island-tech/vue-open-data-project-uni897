@@ -9,11 +9,13 @@
         <option v-for="(rest, index) in rests" :key="index" :value="rest">{{ rest.dba }}</option>
       </select>
       <RestuarantCard v-if="checkSelect" :rest="selected"/>
+      <CircleChart v-if="loaded" :rests="rests"></CircleChart>
     </div>
 </template>
 
 <script setup>
 import { ref, onBeforeMount, computed, watch } from 'vue'
+import CircleChart from '@/components/CircleChart.vue'
 import RestuarantCard from '@/components/RestuarantCard.vue'
 const Rawrests = ref([])
 const rests = ref([])
