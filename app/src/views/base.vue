@@ -15,15 +15,20 @@
 
 <script setup>
 import { ref, onBeforeMount, computed, watch } from 'vue'
+import { getData } from '@/App.vue'
 import CircleChart from '@/components/CircleChart.vue'
 import RestuarantCard from '@/components/RestuarantCard.vue'
-const Rawrests = ref([])
 const rests = ref([])
 const loaded = ref(false)
 const selected = ref("--Select--")
 const searched = ref("")
 
 const checkSelect = computed(() => selected.value !== "--Select--")
+
+onBeforeMount(() =>
+ {
+  const Rawrests = ref(getData)
+})
 
 function Search(){
   if(searched.value === ""){
@@ -35,7 +40,7 @@ function Search(){
   console.log("changed", searched.value)
 }
 
-async function getData() {
+/* async function getData() {
   try {
     const response = await fetch('https://data.cityofnewyork.us/resource/43nn-pn8j.json')
     const data = await response.json()
@@ -45,11 +50,8 @@ async function getData() {
   } catch (error) {
     console.log(error)
   }
-}
-onBeforeMount(() =>
- {
-  getData()
-})
+} */
+
 
 </script>
 
