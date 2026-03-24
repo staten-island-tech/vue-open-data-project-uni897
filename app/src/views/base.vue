@@ -15,19 +15,20 @@
 
 <script setup>
 import { ref, onBeforeMount, computed, watch } from 'vue'
-import { getData } from '@/App.vue'
+import { getData } from '@/state/state.js'
 import CircleChart from '@/components/CircleChart.vue'
 import RestuarantCard from '@/components/RestuarantCard.vue'
 const rests = ref([])
 const loaded = ref(false)
 const selected = ref("--Select--")
 const searched = ref("")
+const Rawrests = ref([])
 
 const checkSelect = computed(() => selected.value !== "--Select--")
 
 onBeforeMount(() =>
  {
-  const Rawrests = ref(getData)
+  Rawrests.value = getData()
 })
 
 function Search(){
