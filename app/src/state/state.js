@@ -12,7 +12,5 @@ export async function getData() {
     }catch (error) {
         console.log(error)
     }
-    console.log(data)
-    console.log(data.value)
     return data.value
 }

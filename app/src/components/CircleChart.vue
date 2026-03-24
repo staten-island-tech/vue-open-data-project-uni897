@@ -1,35 +1,61 @@
 <template>
-    <div>
-         <!-- <Bar
-    id="my-chart-id"
-    :options="chartOptions"
-    :data="chartData"
-  /> -->
+    <div class="w-100 h-100">
+      <Pie
+        id="my-chart-id"
+        :options="chartOptions"
+        :data="chartData"
+      /> 
     </div>
 </template>
 
-<script>
-/* import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+<script setup>
+import { Pie } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { computed } from 'vue'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
+const props = defineProps({
+    rests:{
+        type: Object,
+        required: true
+    }
+})
 
-export default {
-  name: 'CircleChart',
-  components: { Bar },
-  data() {
-    return {
-      chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
-      },
-      chartOptions: {
-        responsive: true
+const chartData = computed(() =>{
+  const counts = {}
+  props.rests.forEach(r => {
+    const label = r.critical_flag
+    counts[label] = (counts[label] || 0) + 1
+  });
+  const backgroundColor = [
+    "#36A2EB", 
+    "#FFCE56", 
+    "#9966FF", 
+  ]
+  return {
+    labels: Object.keys(counts),
+    datasets: [
+      {
+        data: Object.values(counts),
+        backgroundColor: backgroundColor    
       }
+    ]
+  }
+})
+
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top"
+    },
+    title: {
+      display: true,
+      text: "Restaurants by Breaking Safety Codes"
     }
   }
-} */
+}
 </script>
 
 <style scoped></style>
