@@ -29,6 +29,7 @@ const checkSelect = computed(() => selected.value !== "--Select--")
 onBeforeMount(() =>
  {
   Rawrests.value = getData()
+  rests.value = Rawrests.value
 })
 
 function Search(){
@@ -40,20 +41,6 @@ function Search(){
   rests.value = Rawrests.value.filter(item => item.dba.toLowerCase().includes(searched.value.toLowerCase()))
   console.log("changed", searched.value)
 }
-
-/* async function getData() {
-  try {
-    const response = await fetch('https://data.cityofnewyork.us/resource/43nn-pn8j.json')
-    const data = await response.json()
-    Rawrests.value = data
-    rests.value = Rawrests.value
-    loaded.value = true
-  } catch (error) {
-    console.log(error)
-  }
-} */
-
-
 </script>
 
 <style scoped>
