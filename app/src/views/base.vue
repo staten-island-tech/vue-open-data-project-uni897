@@ -9,6 +9,7 @@
       </select>
       <RestuarantCard v-if="checkSelect" :rest="selected"/>
       <CircleChart v-if="loaded" :rests="rests"></CircleChart>
+      <BarChart v-if="loaded" :rests="rests"></BarChart>
     </div>
 </template>
 
@@ -16,6 +17,7 @@
 import { ref, onBeforeMount, computed, watch } from 'vue'
 import { getData } from '@/state/state.js'
 import CircleChart from '@/components/CircleChart.vue'
+import BarChart from '@/components/BarChart.vue'
 import RestuarantCard from '@/components/RestuarantCard.vue'
 
 const rests = ref([])

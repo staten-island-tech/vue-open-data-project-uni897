@@ -1,15 +1,15 @@
 <template>
-    <div class="w-100 h-100">
-      <Pie
-        id="circle"
-        :options="chartOptions"
-        :data="chartData"
-      /> 
+    <div>
+        <Bar
+            id="bar"
+            :options="chartOptions"
+            :data="chartData"
+        />
     </div>
 </template>
 
 <script setup>
-import { Pie } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { computed } from 'vue'
 
@@ -25,7 +25,7 @@ const props = defineProps({
 const chartData = computed(() =>{
   const counts = {}
   props.rests.forEach(r => {
-    const label = r.critical_flag
+    const label = r.boro
     if(counts[label]){
       counts[label] ++
     }else{
@@ -41,6 +41,7 @@ const chartData = computed(() =>{
     labels: Object.keys(counts),
     datasets: [
       {
+        label: 'Data One',
         data: Object.values(counts),
         backgroundColor: backgroundColor
       }
@@ -62,4 +63,6 @@ const chartOptions = {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
