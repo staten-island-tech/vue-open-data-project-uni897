@@ -26,10 +26,8 @@ const chartData = computed(() =>{
   const counts = {}
   props.rests.forEach(r => {
     const label = r.boro
-    if(!counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
-      counts[label] = 1
-    }else if(counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
-      counts[label] ++
+    if(r.critical_flag === "Critical" || r.critical_flag === "Not Critical"){
+      counts[label] = (counts[label] || 0) + 1
     }
   });
   const backgroundColor = [
