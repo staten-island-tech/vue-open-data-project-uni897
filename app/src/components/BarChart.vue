@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <Bar
-            id="bar"
-            :options="chartOptions"
-            :data="chartData"
-        />
+    <div class="h-100">
+      <Bar 
+          id="bar"
+          :options="chartOptions"
+          :data="chartData"
+      />
     </div>
 </template>
 
@@ -17,7 +17,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const props = defineProps({
     rests:{
-        type: Object,
+        type: Array,
         required: true
     }
 })
@@ -26,10 +26,10 @@ const chartData = computed(() =>{
   const counts = {}
   props.rests.forEach(r => {
     const label = r.boro
-    if(counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
-      counts[label] ++
-    }else{
+    if(!counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
       counts[label] = 1
+    }else if(counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
+      counts[label] ++
     }
   });
   const backgroundColor = [

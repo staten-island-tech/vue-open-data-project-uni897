@@ -17,7 +17,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps({
     rests:{
-        type: Object,
+        type: Array,
         required: true
     }
 })

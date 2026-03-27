@@ -37,11 +37,9 @@ onBeforeMount(async () => {
 watch(searched, (newValue) =>{
   if(newValue === ""){
     rests.value = Rawrests.value
-    console.log("reseted", searched.value)
     return
   }
   rests.value = Rawrests.value.filter(item => item.dba.toLowerCase().includes(searched.value.toLowerCase()))
-  console.log("changed", searched.value)
 })
 </script>
 
