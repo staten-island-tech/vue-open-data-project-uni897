@@ -10,10 +10,10 @@
 
 <script setup>
 import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { computed } from 'vue'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const props = defineProps({
     rests:{
@@ -26,22 +26,25 @@ const chartData = computed(() =>{
   const counts = {}
   props.rests.forEach(r => {
     const label = r.boro
-    if(counts[label]){
+    if(counts[label] && (r.critical_flag === "Critical" || r.critical_flag === "Not Critical")){
       counts[label] ++
     }else{
       counts[label] = 1
     }
   });
   const backgroundColor = [
-    "#36A2EB", 
-    "#FFCE56", 
-    "#9966FF", 
+    "#36A2EB",
+    "#FF6384",
+    "#FFCE56",
+    "#4BC0C0",
+    "#9966FF",
+    "#FF9F40"  
   ]
   return {
     labels: Object.keys(counts),
     datasets: [
       {
-        label: 'Data One',
+        label: "# of restuarants breaking safety codes",
         data: Object.values(counts),
         backgroundColor: backgroundColor
       }
